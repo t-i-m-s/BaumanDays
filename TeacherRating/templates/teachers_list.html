@@ -1,0 +1,63 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block links %}
+	<link rel="stylesheet" href="{% static 'css/teachers_list.css' %}">
+{% endblock links %}
+{% block title %}
+	<title>BaumanDays</title>
+{% endblock title %}
+{% block header %}
+	<div id="menu_panel">
+		<div id="profile">
+			{% if request.user.is_authenticated %}
+				<p id="username">{{ request.user }}</p>
+				<p id="logout">
+					{% url 'LogOut' as url_logout_page %}
+					<a href="{{ url_logout_page }}">Leave</a>
+				</p>
+			{% else %}
+				<p id="login">
+					{% url 'LogIn' as url_login_page %}
+					<a href="{{ url_login_page }}">LogIn</a>
+				</p>
+				<p id="registration">
+					{% url 'Register' as url_registration_page %}
+					<a href="{{ url_registration_page }}">Registration</a>
+				</p>
+			{% endif %}
+		</div>
+		<nav id="navigation">
+			<ul>
+				<li><a href="http://127.0.0.1:8000/"><p>Кинотеатр</p></a></li>
+				<li><a href="http://127.0.0.1:8000/"><p>Мемы</p></a></li>
+				<li><a href="http://127.0.0.1:8000/"><p>Игры</p></a></li>
+				<li><a href="http://127.0.0.1:8000/"><p>Новости</p></a></li>
+				<li><a href="/"><p>Преподаватели</p></a></li>
+			</ul>
+		</nav>
+	</div>
+{% endblock header %}
+{% block main %}
+	<div class="categories">
+		<div id="title"><p>{{ discipline }}</p></div>
+		{% if teachers_list %}
+			{% for d in teachers_list %}
+				<div class="teachers_list">
+					<a href="{% url 'Teacher' d.id %}">
+						<div id="t_image">
+							<img src="{{ d.photo_path }}" alt="">
+						</div>
+						<div id="t_inf">
+							<p id="t_name">{{ d.name }}</p>
+							<p id="t_patronymic">{{ d.patronymic }}</p>
+						</div>
+					</a>
+				</div>
+			{% endfor %}
+		{% else %}
+			Nothing added yet =(
+		{% endif %}
+	</div>
+{% endblock main %}
+{% block footer %}
+{% endblock footer %}

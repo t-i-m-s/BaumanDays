@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>BaumanDays</title>
+</head>
+<body>
+	<h3>!Register!</h3>
+	<br>
+	<br>
+	<form id="RegisterForm" method="post">
+		{% csrf_token %}
+		{{ form }}
+		<button type="submit" form="RegisterForm">Отправить</button>
+	</form>
+	<br>
+	<br>
+	<p><a href="/"><<== Back</a></p>
+</body>
+</html>
